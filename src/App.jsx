@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Mainpage from "./component/Mainpage";
-import Create from "./component/Create";
-import Update from "./component/Update";
+import Mainpage from "./components/Mainpage";
+import Create from "./components/Create";
+import Update from "./components/Update";
 function App() {
   return (
     <div className="App">

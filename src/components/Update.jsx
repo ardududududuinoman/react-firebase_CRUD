@@ -17,15 +17,6 @@ const Update = () => {
   } = useStore();
 
   const db = firebase.firestore();
-  const updateDB = (obj, editTitle, editDis) => {
-    db.collection("test")
-      .doc(obj.id)
-      .update({ title: "수정된 제목", dis: "수정된내용" })
-      .then(() => {
-        alert("수정됨");
-      })
-      .catch();
-  };
 
   return (
     <Fregment>

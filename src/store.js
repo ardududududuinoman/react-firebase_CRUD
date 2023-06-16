@@ -9,9 +9,9 @@ const useStore = create((set) => ({
   setdis: (params) => {
     set((state) => ({ dis: params }));
   },
-  list: [],
-  addlist: (params) => {
-    set((state) => ({ list: params }));
+  docslist: [],
+  setDocslist: (params) => {
+    set((state) => ({ docslist: params }));
   },
   oldTitle: "",
   setoldTitle: (params) => {
