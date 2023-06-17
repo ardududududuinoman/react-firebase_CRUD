@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import firebase from "firebase";
 import { useEffect, useState } from "react";
+import { data } from "jquery";
 
 const DataInput = (props) => {
   const db = firebase.firestore();
@@ -13,7 +14,7 @@ const DataInput = (props) => {
       .doc(id)
       .delete()
       .then(() => {
-        alert("데이터베이스에서만 삭제되고 재랜더링함");
+        // alert("데이터베이스에서만 삭제되고 재랜더링함");
         window.location.href = "/";
         // console.log(id.target.title);
       })
@@ -36,68 +37,88 @@ const DataInput = (props) => {
       console.log(
         `타이틀값 변화감지됨 변화된값은${e.target.value}  해당글의 id값은 ${props.id}`
       );
-      setNewTile(e.target.value);
+      // setNewTile(e.target.value);
     } else if (e.target.id === "disinput") {
       console.log(
         `내용값  변화감지됨 변화된값은${e.target.value} 해당글의 id값은 ${props.id}`
       );
-      setNewDis(e.target.value);
+      // setNewDis(e.target.value);
     }
   };
-  useEffect(() => {
-    updateData(props.id, newTitle, newDis);
-  }, [newTitle, newDis, updateData, props.id]);
+  // useEffect(() => {
+  //   updateData(props.id, newTitle, newDis);
+  // }, [newTitle, newDis, updateData, props.id]);
 
-  const Style = styled.div`
-    display: flex;
-    width: auto;
-    flex-flow: row nowrap;
-    margin-top: 10px;
-  `;
-
-  let TitleInput = styled.input`
-    width: 100px;
-    outline: black solid 1px;
-  `;
-
-  let DisInput = styled.input`
-    width: 500px;
-    outline: black solid 1px;
-  `;
+  const outfocus = (e) => {
+    const dataTag = e.target.dataset.tag;
+    console.log(`${dataTag}이 포커스를잃음`);
+    if (e.target.value === e.target.defaultValue) {
+      console.log("값이 변화되지 않음");
+    } else if (dataTag === "titleinput") {
+      db.collection("test")
+        .doc(props.id)
+        .update({ title: e.target.value })
+        .then(() => {
+          console.log(`제목이 ${e.target.value}로 변경됨`);
+        })
+        .catch();
+    } else if (dataTag === "disinput") {
+      db.collection("test")
+        .doc(props.id)
+        .update({ dis: e.target.value })
+        .then(() => {
+          console.log(`내용이 ${e.target.value}로 변경됨`);
+        })
+        .catch();
+    }
+  };
 
   return (
     <div>
       <Style>
         <TitleInput
           id="titleinput"
-          onChange={(e) => {
-            onChage(e);
-          }}
+          data-tag="titleinput"
           defaultValue={props.title}
+          onBlur={(e) => {
+            outfocus(e);
+          }}
         />
         <DisInput
           id="disinput"
-          onChange={(e) => {
-            onChage(e);
-          }}
+          data-tag="disinput"
           defaultValue={props.dis}
-        />
-        <button
-          onClick={(e) => {
-            updateData(props.id);
+          onBlur={(e) => {
+            outfocus(e);
           }}
-        >
-          글수정
-        </button>
+        />
         <button
           onClick={() => {
             deleteData(props.id);
           }}
         >
-          글삭제
+          DEL
         </button>
       </Style>
     </div>
   );
 };
+
+const Style = styled.div`
+  display: flex;
+  width: auto;
+  flex-flow: row nowrap;
+  margin-top: 10px;
+`;
+
+let TitleInput = styled.textarea`
+  width: 200px;
+  outline: black solid 1px;
+`;
+
+let DisInput = styled.textarea`
+  width: 1300px;
+  outline: black solid 1px;
+`;
+
 export default DataInput;

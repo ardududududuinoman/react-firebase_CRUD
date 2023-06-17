@@ -7,8 +7,6 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Mainpage />} />
-        <Route path="/create" element={<Create />} />
-        <Route path="/Update" element={<Update />} />
       </Routes>
     </div>
   );

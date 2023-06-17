@@ -3,6 +3,8 @@ import firebase from "../fbase";
 import useStore from "../store";
 import styled from "styled-components";
 import DataInput from "./DataInput";
+import Create from "./Create";
+import "../CSS/app.css";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
@@ -43,8 +45,10 @@ const Mainpage = () => {
 
   return (
     <div>
-      <h1>메인페이지다</h1>
-      <a href="/Create">글쓰기</a>
+      <Title>N O R U L E H E R E</Title>
+      <h6>Search with CTAL + F</h6>
+      <Create></Create>
+      {/* <a href="/Create">글쓰기</a> */}
       {docslist.map((doc, key) => (
         <DataInput
           key={key}
@@ -56,5 +60,9 @@ const Mainpage = () => {
     </div>
   );
 };
+
+const Title = styled.h1`
+  font-family: "NeoDunggeunmo";
+`;
 
 export default Mainpage;
