@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import firebase from "../fbase";
+import { firebase } from "../fbase";
 import useStore from "../store";
 import styled from "styled-components";
 import DataInput from "./DataInput";
 import Create from "./Create";
 import "../CSS/app.css";
+import Navbar from "./Navbar";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 const Mainpage = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const { docslist, setDocslist, setoldTitle, setoldDis, setthisId } =
-    useStore();
+  const { docslist, setDocslist } = useStore();
   const loadDocsList = [];
   const db = firebase.firestore();
 
@@ -45,10 +45,7 @@ const Mainpage = () => {
 
   return (
     <div>
-      <Title>N O R U L E H E R E</Title>
-      <h6>Search with CTAL + F</h6>
-      <Create></Create>
-      {/* <a href="/Create">글쓰기</a> */}
+      <Create />
       {docslist.map((doc, key) => (
         <DataInput
           key={key}
@@ -60,9 +57,5 @@ const Mainpage = () => {
     </div>
   );
 };
-
-const Title = styled.h1`
-  font-family: "NeoDunggeunmo";
-`;
 
 export default Mainpage;

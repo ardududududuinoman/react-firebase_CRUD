@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useStore from "../store";
-import firebase from "../fbase";
+import { firebase } from "../fbase";
 import styled from "styled-components";
 // Import the functions you need from the SDKs you need
 
@@ -44,14 +44,14 @@ function Create() {
     <div className="App">
       <Style>
         <TitleInput
-          placeholder="제목"
+          placeholder="title"
           onChange={(e) => settitle(e.target.value)}
           value={title}
           type="text"
         />
 
         <DisInput
-          placeholder="내용"
+          placeholder="discription"
           type="text"
           value={dis}
           onChange={(e) => {

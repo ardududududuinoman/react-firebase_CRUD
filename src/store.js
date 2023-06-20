@@ -25,6 +25,10 @@ const useStore = create((set) => ({
   setthisId: (params) => {
     set((state) => ({ thisId: params }));
   },
+  userData: "",
+  setUserData: (param) => {
+    set((state) => ({ user: param }));
+  },
 }));
 
 export default useStore;

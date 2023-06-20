@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import firebase from "firebase";
-import { useEffect, useState } from "react";
-import { data } from "jquery";
 
 const DataInput = (props) => {
   const db = firebase.firestore();
-  const [newTitle, setNewTile] = useState("");
-  const [newDis, setNewDis] = useState("");
 
   const deleteData = (id) => {
     console.log(id);
@@ -23,31 +19,31 @@ const DataInput = (props) => {
       });
   };
 
-  const updateData = (id, editTitle, editDis) => {
-    db.collection("test")
-      .doc(id)
-      .update({ title: editTitle, dis: editDis })
-      .then(() => {})
-      .catch();
-  };
-
-  const onChage = async (e) => {
-    console.log(e.target);
-    if (e.target.id === "titleinput") {
-      console.log(
-        `타이틀값 변화감지됨 변화된값은${e.target.value}  해당글의 id값은 ${props.id}`
-      );
-      // setNewTile(e.target.value);
-    } else if (e.target.id === "disinput") {
-      console.log(
-        `내용값  변화감지됨 변화된값은${e.target.value} 해당글의 id값은 ${props.id}`
-      );
-      // setNewDis(e.target.value);
-    }
-  };
-  // useEffect(() => {
-  //   updateData(props.id, newTitle, newDis);
-  // }, [newTitle, newDis, updateData, props.id]);
+  // const updateData = (id, editTitle, editDis) => {
+  //   db.collection("test")
+  //     .doc(id)
+  //     .update({ title: editTitle, dis: editDis })
+  //     .then(() => {})
+  //     .catch();
+  // };
+  //! 주석들 써놓고 사용안한 함수들임
+  // const onChage = async (e) => {
+  //   console.log(e.target);
+  //   if (e.target.id === "titleinput") {
+  //     console.log(
+  //       `타이틀값 변화감지됨 변화된값은${e.target.value}  해당글의 id값은 ${props.id}`
+  //     );
+  //     // setNewTile(e.target.value);
+  //   } else if (e.target.id === "disinput") {
+  //     console.log(
+  //       `내용값  변화감지됨 변화된값은${e.target.value} 해당글의 id값은 ${props.id}`
+  //     );
+  //     // setNewDis(e.target.value);
+  //   }
+  // };
+  // // useEffect(() => {
+  // //   updateData(props.id, newTitle, newDis);
+  // // }, [newTitle, newDis, updateData, props.id]);
 
   const outfocus = (e) => {
     const dataTag = e.target.dataset.tag;
